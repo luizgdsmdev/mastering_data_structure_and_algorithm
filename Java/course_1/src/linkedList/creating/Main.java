@@ -4,46 +4,47 @@ public class Main {
 
 
     public static void main(String[] args){
-        //create the append
-        //Create the remove
         LinkedList myLinkedList = new LinkedList(1);
-        myLinkedList.appendNode(2);
-        myLinkedList.appendNode(3);
-        myLinkedList.appendNode(4);
+        myLinkedList.appendLast(2);
+        myLinkedList.appendLast(3);
+        myLinkedList.appendLast(4);
 
-        System.out.println(myLinkedList.getHead());
-        System.out.println(myLinkedList.getTail());
-        System.out.println(myLinkedList.getLength());
-        System.out.println("-----------");
+        myLinkedList.getHead();
+        myLinkedList.getTail();
+        myLinkedList.getLenght();
         myLinkedList.removeLast();
+        System.out.println("--------");
+        myLinkedList.getHead();
+        myLinkedList.getTail();
+        myLinkedList.getLenght();
         myLinkedList.removeLast();
+        System.out.println("--------");
+        myLinkedList.getHead();
+        myLinkedList.getTail();
+        myLinkedList.getLenght();
         myLinkedList.removeLast();
-
-        System.out.println("-----------");
-        System.out.println(myLinkedList.getHead());
-        System.out.println(myLinkedList.getTail());
-        System.out.println(myLinkedList.getLength());
+        System.out.println("--------");
+        myLinkedList.getHead();
+        myLinkedList.getTail();
+        myLinkedList.getLenght();
         myLinkedList.removeLast();
+        System.out.println("--------");
+        myLinkedList.getHead();
+        myLinkedList.getTail();
+        myLinkedList.getLenght();
 
-
-        System.out.println("-----------");
-        System.out.println(myLinkedList.getHead());
-        System.out.println(myLinkedList.getTail());
-        System.out.println(myLinkedList.getLength());
-
-
-        myLinkedList.appendNode(4);
-        System.out.println("-----------");
-        System.out.println(myLinkedList.getHead());
-        System.out.println(myLinkedList.getTail());
-        System.out.println(myLinkedList.getLength());
-
+        myLinkedList.appendLast(4);
+        System.out.println("--------");
+        myLinkedList.getHead();
+        myLinkedList.getTail();
+        myLinkedList.getLenght();
 
         myLinkedList.removeLast();
-        System.out.println("-----------");
-        System.out.println(myLinkedList.getHead());
-        System.out.println(myLinkedList.getTail());
-        System.out.println(myLinkedList.getLength());
+        System.out.println("--------");
+        myLinkedList.getHead();
+        myLinkedList.getTail();
+        myLinkedList.getLenght();
+
 
 
 

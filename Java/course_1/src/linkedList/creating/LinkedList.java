@@ -4,9 +4,9 @@ package linkedList.creating;
 public class LinkedList {
     private Node head;
     private Node tail;
-    private int length;
+    private int length = 0;
 
-    static class Node{
+    class Node{
         int value;
         Node next;
 
@@ -22,67 +22,69 @@ public class LinkedList {
         length = 1;
     }
 
-    public void printLinkedList(){
-        Node temp = head;
-        while(temp != null){
-            System.out.println(temp.value);
-            temp = temp.next;
-        }
-    }
-
-    public Integer getHead() {
-        if (head == null) return null;
-        return head.value;
-    }
-
-    public Integer getTail(){
-        if (tail == null) return null;
-        return tail.value;
-    }
-
-    public Integer getLength(){
-        return length;
-    }
-
-    public void appendNode(int value){
-        //If the linkedList is empty, Head and Tail points to this new Node
-        //need to create a new Node
-        //Current Tail points to this new Node
-        //Update the Tail pointing to this new Node
-        Node newnode = new Node(value);
-
-        if(length <= 0){
-            head = newnode;
-            tail = newnode;
+    public Node appendLast(int value){
+        Node newNode = new Node(value);
+        if (length == 0){
+            head = newNode;
+            tail = newNode;
         }else{
-            tail.next = newnode;
-            tail = newnode;
+            tail.next = newNode;
+            tail = newNode;
         }
         length++;
+
+        return tail;
     }
 
-    public Node removeLast() {
+    public Node removeLast(){
+
         if(length == 0) return null;
 
         if(length == 1){
             head = null;
             tail = null;
             length = 0;
-
             return null;
+        }else{
+            Node temp = head;
+            while(temp.next != tail){
+                temp = temp.next;
+            }
+            tail = temp;
+            tail.next = null;
+            length--;
+            return temp;
         }
 
-        Node temp = head;
-        //[1,2,3]
-        while(temp.next == tail){
-            temp = temp.next;
+    }
+
+    public void printLinkedList(){
+        if(length == 0) System.out.println("Empty Linked list.");
+        else {
+            Node temp = head;
+            for (int i = 0; i < length; i++){
+                System.out.println(temp.value);
+                temp = temp.next;
+            }
         }
+    }
 
-        tail = temp;
-        tail.next = null;
-        length--;
+    public void getHead(){
+        if(head == null) System.out.println("Null");
+        else{
+            System.out.println(head.value);
+        }
+    }
 
-        return temp;
+    public void getTail(){
+        if(tail == null) System.out.println("Null");
+        else{
+            System.out.println(tail.value);
+        }
+    }
+
+    public void getLenght(){
+        System.out.println(length);
     }
 
 }
