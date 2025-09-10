@@ -1,4 +1,4 @@
-package exercises.BigO;
+package BigO;
 
 /*
 <> Big O: O(n)

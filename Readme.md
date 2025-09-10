@@ -114,7 +114,7 @@ While this is a personal study repository, I welcome feedback, suggestions, or i
 If you have questions, suggestions, or just want to connect, feel free to reach out:
 
 - **GitHub**: [luizgdsmdev](https://github.com/luizgdsmdev)
-- **Linkedin**: (luizgdsm)(https://www.linkedin.com/in/luizgdsm/)
+- **Linkedin**: [luizgdsm](https://www.linkedin.com/in/luizgdsm/)
 
 ---
 
