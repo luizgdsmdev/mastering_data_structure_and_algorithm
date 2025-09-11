@@ -127,6 +127,26 @@ public class LinkedList {
         return true;
     }
 
+    public boolean removeNode(int index){
+        if(index <= 0 || index > length) return false;
+        if(index == 1){ removeFirst(); return true;}
+        if(index == length){ removeLast(); return true;}
+
+        Node toExclude = head;
+        Node prev = new Node(0);
+        for (int i = 1; i < index; i++){
+            if((index - 1) == i){
+                prev = toExclude;
+            }
+            toExclude = toExclude.next;
+        }
+
+        prev.next = toExclude.next;
+        toExclude.next = null;
+        length--;
+        return true;
+    }
+
 
 
 
