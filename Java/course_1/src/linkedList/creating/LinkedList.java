@@ -108,6 +108,25 @@ public class LinkedList {
         return true;
     }
 
+    public boolean insertNode(int index, int value){
+        Node newNode = new Node(value);
+
+        if(index <= 0 || index > length) return false;
+        if(index == 1){
+            appendFirst(value);
+            return true;
+        }
+
+
+        Node temp = head;
+        for(int i = 1; i < (index - 1); i++){ temp = temp.next; }
+
+        newNode.next = temp.next;
+        temp.next = newNode;
+        length++;
+        return true;
+    }
+
 
 
 

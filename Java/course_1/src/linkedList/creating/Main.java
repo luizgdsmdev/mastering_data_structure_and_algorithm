@@ -7,10 +7,15 @@ public class Main {
         LinkedList myLinkedList = new LinkedList(1);
         myLinkedList.appendLast(2);
         myLinkedList.appendLast(3);
+        myLinkedList.appendLast(4);
+        myLinkedList.appendLast(5);
+        myLinkedList.getlength();
 
-        System.out.println(myLinkedList.setNode(-10, 5));;
-
+        myLinkedList.insertNode(1, 777);
         myLinkedList.getlinkedList();
+        myLinkedList.getlength();
+
+
 
 
 
