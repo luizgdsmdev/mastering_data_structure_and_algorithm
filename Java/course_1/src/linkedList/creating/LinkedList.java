@@ -4,7 +4,7 @@ package linkedList.creating;
 public class LinkedList {
     private Node head;
     private Node tail;
-    private int length = 0;
+    private int length;
 
     class Node{
         int value;
@@ -22,9 +22,9 @@ public class LinkedList {
         length = 1;
     }
 
-    public Node appendLast(int value){
+    public void appendLast(int value){
         Node newNode = new Node(value);
-        if (length == 0){
+        if(length == 0){
             head = newNode;
             tail = newNode;
         }else{
@@ -32,13 +32,10 @@ public class LinkedList {
             tail = newNode;
         }
         length++;
-
-        return tail;
     }
 
     public Node removeLast(){
-
-        if(length == 0) return null;
+        if(length <= 0) return null;
 
         if(length == 1){
             head = null;
@@ -46,45 +43,107 @@ public class LinkedList {
             length = 0;
             return null;
         }else{
-            Node temp = head;
-            while(temp.next != tail){
-                temp = temp.next;
-            }
-            tail = temp;
-            tail.next = null;
-            length--;
-            return temp;
+        Node temp = head;
+        while(temp.next != tail){
+            temp = temp.next;
         }
+        tail = temp;
+        tail.next = null;
+        length--;
 
+        return temp;
+        }
     }
 
-    public void printLinkedList(){
-        if(length == 0) System.out.println("Empty Linked list.");
-        else {
-            Node temp = head;
-            for (int i = 0; i < length; i++){
+    public void appendFirst(int value){
+        Node newNode = new Node(value);
+        if(length == 0){
+            head = newNode;
+            tail = newNode;
+        }else{
+            newNode.next = head;
+            head = newNode;
+        }
+        length++;
+    }
+
+    public void removeFirst(){
+        if(length == 0){
+            System.out.println("Linked list already empty");
+        }else if(length == 1){
+            head = null;
+            tail = null;
+            length = 0;
+        }else{
+            Node temp = head.next;
+            head = temp;
+            temp = null;
+            length--;
+        }
+    }
+
+    public Node getNode(int index){
+        if(index <= 0 || index > length) return null;
+        if(length == index) return tail;
+
+        Node temp = head;
+        for (int i = 1; i < index; i++){
+            temp = temp.next;
+        }
+        return temp;
+    }
+
+    public boolean setNode(int index, int value){
+        if(index <= 0 || index > length) return false;
+        if(index == length){
+            tail.value = value;
+            return true;
+        }
+
+        Node temp = head;
+        for(int i = 1; i < index; i++){
+            temp = temp.next;
+        }
+        temp.value = value;
+        return true;
+    }
+
+
+
+
+    public void getHead(){
+        if(head == null){
+            System.out.println("Empty Linked list.");
+        }else{
+            System.out.println("Head: " + head.value);
+        }
+    }
+
+    public void getTail(){
+        if(tail == null){
+            System.out.println("Empty Linked list.");
+        }else{
+            System.out.println("tail: " + tail.value);
+        }
+    }
+
+    public void getlength(){
+        if(length == 0){
+            System.out.println("Empty Linked list.");
+        }else{
+            System.out.println("length: " + length);
+        }
+    }
+
+    public void getlinkedList(){
+        Node temp = head;
+        if(length == 0){
+            System.out.println("Empty Linked list.");
+        }else{
+            while (temp != null){
                 System.out.println(temp.value);
                 temp = temp.next;
             }
         }
     }
-
-    public void getHead(){
-        if(head == null) System.out.println("Null");
-        else{
-            System.out.println(head.value);
-        }
-    }
-
-    public void getTail(){
-        if(tail == null) System.out.println("Null");
-        else{
-            System.out.println(tail.value);
-        }
-    }
-
-    public void getLenght(){
-        System.out.println(length);
-    }
-
 }
