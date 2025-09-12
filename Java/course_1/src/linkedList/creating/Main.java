@@ -9,11 +9,8 @@ public class Main {
         myLinkedList.appendLast(3);
         myLinkedList.appendLast(4);
         myLinkedList.appendLast(5);
-        myLinkedList.getlength();
 
-        myLinkedList.removeNode(5);
-
-        myLinkedList.getlength();
+        myLinkedList.reverseLinkedList();
         myLinkedList.getlinkedList();
 
     }
