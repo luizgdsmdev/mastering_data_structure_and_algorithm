@@ -8,10 +8,8 @@ public class Main {
         myLinkedList.appendLast(2);
         myLinkedList.appendLast(3);
         myLinkedList.appendLast(4);
-        myLinkedList.appendLast(5);
 
         myLinkedList.reverseLinkedList();
         myLinkedList.getlinkedList();
-
     }
 }

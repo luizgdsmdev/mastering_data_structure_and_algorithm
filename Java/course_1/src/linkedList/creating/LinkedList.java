@@ -1,5 +1,6 @@
 package linkedList.creating;
 
+
 //Basic structure for a linked list
 public class LinkedList {
     private Node head;
@@ -22,132 +23,172 @@ public class LinkedList {
         length = 1;
     }
 
-    public void appendLast(int value){
+    //Append an element to the end of the LinkedList
+    public boolean appendLast(int value){
         Node newNode = new Node(value);
-        if(length == 0){
+        if (length == 0) {
             head = newNode;
             tail = newNode;
-        }else{
+        }else {
             tail.next = newNode;
             tail = newNode;
         }
         length++;
+        return true;
     }
 
-    public Node removeLast(){
-        if(length <= 0) return null;
+    //Remove last element from the LinkedList by looping on Nodes
+    public boolean removeLast(){
+        if(length == 0) return false;
 
         if(length == 1){
             head = null;
             tail = null;
-            length = 0;
-            return null;
         }else{
-        Node temp = head;
-        while(temp.next != tail){
-            temp = temp.next;
+            Node temp = head;
+            while (temp.next != tail){
+                temp = temp.next;
+            }
+            tail = temp;
         }
-        tail = temp;
-        tail.next = null;
-        length--;
 
-        return temp;
-        }
+        length--;
+        return true;
     }
 
-    public void appendFirst(int value){
+    //Append new node to the beginning of the LinkedList (head)
+    public boolean appendFirst(int value){
         Node newNode = new Node(value);
-        if(length == 0){
+        if (length == 0){
             head = newNode;
             tail = newNode;
+        }
+
+        if(length == 1){
+            newNode.next = tail;
+            head = newNode;
         }else{
             newNode.next = head;
             head = newNode;
         }
+
         length++;
+        return true;
     }
 
-    public void removeFirst(){
-        if(length == 0){
-            System.out.println("Linked list already empty");
-        }else if(length == 1){
+    //Remove the first element from the LinkedList (head)
+    public boolean removeFirst(){
+        if(length == 0) return false;
+        if(length == 1){
             head = null;
             tail = null;
-            length = 0;
         }else{
             Node temp = head.next;
             head = temp;
             temp = null;
-            length--;
         }
+        length--;
+        return true;
     }
 
+    //Get specific node from a LinkedList position
     public Node getNode(int index){
+        if(length == 0) return null;
         if(index <= 0 || index > length) return null;
-        if(length == index) return tail;
-
-        Node temp = head;
-        for (int i = 1; i < index; i++){
-            temp = temp.next;
-        }
-        return temp;
-    }
-
-    public boolean setNode(int index, int value){
-        if(index <= 0 || index > length) return false;
-        if(index == length){
-            tail.value = value;
-            return true;
-        }
+        if(index == 1) return head;
+        if(index == length) return tail;
 
         Node temp = head;
         for(int i = 1; i < index; i++){
             temp = temp.next;
         }
-        temp.value = value;
-        return true;
+        return temp;
     }
 
-    public boolean insertNode(int index, int value){
-        Node newNode = new Node(value);
-
+    //Set a specific value to a Node
+    public boolean setNode(int index, int value){
         if(index <= 0 || index > length) return false;
-        if(index == 1){
-            appendFirst(value);
+
+        Node newNode = new Node(value);
+        if(index == 1 && length == 1){
+            head = newNode;
+            tail = newNode;
             return true;
         }
 
+        if(index == 1){
+            newNode.next = head.next;
+            head = newNode;
+            return true;
+        }else{
+            Node temp = head;
+            Node prev = null;
+            for(int i = 1; i < index; i++){
+                prev = temp;
+                temp = temp.next;
+            }
+            prev.next = newNode;
+            newNode.next = temp.next;
 
-        Node temp = head;
-        for(int i = 1; i < (index - 1); i++){ temp = temp.next; }
+            if(temp == tail){
+                tail = newNode;
+            }
+            temp = null;
+        }
 
-        newNode.next = temp.next;
-        temp.next = newNode;
+        return true;
+
+    }
+
+    //Insert a new Node into a specific position
+    public boolean insertNode(int index, int value){
+        if(index <= 0 || index > length) return false;
+        Node newNode = new Node(value);
+        if(index == 1){
+            newNode.next = head;
+            head = newNode;
+        }else{
+            Node temp = head;
+            Node prev = null;
+            for(int i = 1; i < index; i++){
+                prev = temp;
+                temp = temp.next;
+            }
+            newNode.next = temp;
+            prev.next = newNode;
+        }
         length++;
         return true;
     }
 
+    //Remove Node from a specific position
     public boolean removeNode(int index){
         if(index <= 0 || index > length) return false;
-        if(index == 1){ removeFirst(); return true;}
-        if(index == length){ removeLast(); return true;}
-
-        Node toExclude = head;
-        Node prev = new Node(0);
-        for (int i = 1; i < index; i++){
-            if((index - 1) == i){
-                prev = toExclude;
-            }
-            toExclude = toExclude.next;
+        if(index == 1){
+            removeFirst();
+            return true;
+        }
+        if(index == length){
+            removeLast();
+            return true;
         }
 
-        prev.next = toExclude.next;
-        toExclude.next = null;
+        Node temp = head;
+        Node prev = null;
+        for(int i = 1; i < index; i++){
+            prev = temp;
+            temp = temp.next;
+        }
+        prev.next = temp.next;
+        temp = null;
         length--;
         return true;
     }
 
-    public void reverseLinkedList(){
+    //Reverse all Nodes from the existing LinkedList
+    public boolean reverseLinkedList(){
+        if(length == 0 || length == 1) return false;
+
         Node temp = head;
         head = tail;
         tail = temp;
@@ -160,43 +201,45 @@ public class LinkedList {
             before = temp;
             temp = after;
         }
+
+        //   H              T
+        //   4 -> null      1 -> 2 -> 3 ->
+        //          b       t    a
+
+        return true;
     }
 
-
-
     public void getHead(){
-        if(head == null){
-            System.out.println("Empty Linked list.");
+        if(length == 0){
+            System.out.println("Empty LinkedList");
         }else{
             System.out.println("Head: " + head.value);
         }
     }
 
     public void getTail(){
-        if(tail == null){
-            System.out.println("Empty Linked list.");
+        if(length == 0){
+            System.out.println("Empty LinkedList");
         }else{
-            System.out.println("tail: " + tail.value);
+            System.out.println("Tail: " + tail.value);
         }
     }
 
     public void getlength(){
         if(length == 0){
-            System.out.println("Empty Linked list.");
+            System.out.println("Empty LinkedList.");
         }else{
             System.out.println("length: " + length);
         }
     }
 
     public void getlinkedList(){
+        if(length == 0) System.out.println("Empty LinkedList.");
         Node temp = head;
-        if(length == 0){
-            System.out.println("Empty Linked list.");
-        }else{
-            while (temp != null){
-                System.out.println(temp.value);
-                temp = temp.next;
-            }
+
+        for (int i = 0; i < length; i++){
+            System.out.println(temp.value);
+            temp = temp.next;
         }
     }
 }
