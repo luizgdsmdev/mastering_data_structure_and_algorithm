@@ -23,153 +23,122 @@ public class LinkedList {
         length = 1;
     }
 
-    //Append an element to the end of the LinkedList
+    //Appending value to the end of the LinkedList, O(1)
     public boolean appendLast(int value){
         Node newNode = new Node(value);
-        if (length == 0) {
+        if(length == 0){
+            tail = newNode;
             head = newNode;
-            tail = newNode;
-        }else {
-            tail.next = newNode;
-            tail = newNode;
+            length++;
+            return true;
         }
+        if(length == 1){
+            head.next = newNode;
+            tail = newNode;
+            length++;
+            return true;
+        }
+
+        tail.next = newNode;
+        tail = newNode;
+
         length++;
         return true;
     }
 
-    //Remove last element from the LinkedList by looping on Nodes
-    public boolean removeLast(){
+    //Removing element from the end of the LinkedList O(n)
+    public boolean removelast(){
         if(length == 0) return false;
-
         if(length == 1){
             head = null;
             tail = null;
-        }else{
-            Node temp = head;
+            length--;
+            return true;
+        }
+
+        Node temp = head;
+        while(temp.next != tail){
+            temp = temp.next;
+        }
+
+        tail = temp;
+        tail.next = null;
+
+        length--;
+        return true;
+    }
+
+    //Adding element to the beginning of the LinkedList, O(1)
+    public boolean appendFirst(int value){
+        Node newNode = new Node(value);
+        if(length == 0){
+            head = newNode;
+            tail = newNode;
+            length++;
+            return true;
+        }
+
+        newNode.next = head;
+        head = newNode;
+
+        length++;
+        return true;
+    }
+
+    //Removing from the beginning of the LinkedList, O(1)
+    public boolean removFirst(){
+        if(length == 0) return false;
+        if(length == 1){
+            head = null;
+            tail = null;
+            length--;
+            return true;
+        }
+
+        head = head.next;
+        length--;
+        return true;
+    }
+
+    //Adding a node into a specific position in the LinkedList sequence (by index), O(n)
+    public boolean addNode(int index, int value){
+        if(index <= 0 || index > length) return false;
+        if(index == 1){
+            appendFirst(value);
+            return true;
+        }
+
+        Node newNode = new Node(value);
+        Node temp = head;
+        if(index == length){
             while (temp.next != tail){
                 temp = temp.next;
             }
-            tail = temp;
-        }
-
-        length--;
-        return true;
-    }
-
-    //Append new node to the beginning of the LinkedList (head)
-    public boolean appendFirst(int value){
-        Node newNode = new Node(value);
-        if (length == 0){
-            head = newNode;
-            tail = newNode;
-        }
-
-        if(length == 1){
             newNode.next = tail;
-            head = newNode;
-        }else{
-            newNode.next = head;
-            head = newNode;
+            temp.next = newNode;
+            length++;
+            return true;
         }
 
-        length++;
-        return true;
-    }
-
-    //Remove the first element from the LinkedList (head)
-    public boolean removeFirst(){
-        if(length == 0) return false;
-        if(length == 1){
-            head = null;
-            tail = null;
-        }else{
-            Node temp = head.next;
-            head = temp;
-            temp = null;
-        }
-        length--;
-        return true;
-    }
-
-    //Get specific node from a LinkedList position
-    public Node getNode(int index){
-        if(length == 0) return null;
-        if(index <= 0 || index > length) return null;
-        if(index == 1) return head;
-        if(index == length) return tail;
-
-        Node temp = head;
-        for(int i = 1; i < index; i++){
+        for(int i = 1; i < (index - 1); i++){
             temp = temp.next;
         }
-        return temp;
-    }
 
-    //Set a specific value to a Node
-    public boolean setNode(int index, int value){
-        if(index <= 0 || index > length) return false;
-
-        Node newNode = new Node(value);
-        if(index == 1 && length == 1){
-            head = newNode;
-            tail = newNode;
-            return true;
-        }
-
-        if(index == 1){
-            newNode.next = head.next;
-            head = newNode;
-            return true;
-        }else{
-            Node temp = head;
-            Node prev = null;
-            for(int i = 1; i < index; i++){
-                prev = temp;
-                temp = temp.next;
-            }
-            prev.next = newNode;
-            newNode.next = temp.next;
-
-            if(temp == tail){
-                tail = newNode;
-            }
-            temp = null;
-        }
-
-        return true;
-
-    }
-
-    //Insert a new Node into a specific position
-    public boolean insertNode(int index, int value){
-        if(index <= 0 || index > length) return false;
-        Node newNode = new Node(value);
-        if(index == 1){
-            newNode.next = head;
-            head = newNode;
-        }else{
-            Node temp = head;
-            Node prev = null;
-            for(int i = 1; i < index; i++){
-                prev = temp;
-                temp = temp.next;
-            }
-            newNode.next = temp;
-            prev.next = newNode;
-        }
+        newNode.next = temp.next;
+        temp.next = newNode;
         length++;
         return true;
     }
 
-    //Remove Node from a specific position
+    //Removing a specific element from the LinkedList sequence (by index), O(n)
     public boolean removeNode(int index){
         if(index <= 0 || index > length) return false;
         if(index == 1){
-            removeFirst();
+            removFirst();
             return true;
         }
         if(index == length){
-            removeLast();
+            removelast();
             return true;
         }
 
@@ -181,14 +150,26 @@ public class LinkedList {
         }
         prev.next = temp.next;
         temp = null;
+
         length--;
         return true;
     }
 
-    //Reverse all Nodes from the existing LinkedList
-    public boolean reverseLinkedList(){
-        if(length == 0 || length == 1) return false;
+    //Return the specific Node value (by index), O(n)
+    public Node getNode(int index){
+        if(index <= 0 || index > length) return null;
+        if(index == 1) return head;
+        if(index == length) return tail;
 
+        Node temp = head;
+        for(int i = 1; i < index; i++){
+            temp = temp.next;
+        }
+        return temp;
+    }
+
+    //Reverse all node of the LinkedLists, O(n)
+    public void reverseLinkedList(){
         Node temp = head;
         head = tail;
         tail = temp;
@@ -201,13 +182,10 @@ public class LinkedList {
             before = temp;
             temp = after;
         }
-
-        //   H              T
-        //   4 -> null      1 -> 2 -> 3 ->
-        //          b       t    a
-
-        return true;
     }
+
+
+
 
     public void getHead(){
         if(length == 0){

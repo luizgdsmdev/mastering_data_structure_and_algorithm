@@ -9,7 +9,11 @@ public class Main {
         myLinkedList.appendLast(3);
         myLinkedList.appendLast(4);
 
+
         myLinkedList.reverseLinkedList();
+        myLinkedList.getHead();
+        myLinkedList.getTail();
+        myLinkedList.getlength();
         myLinkedList.getlinkedList();
     }
 }
