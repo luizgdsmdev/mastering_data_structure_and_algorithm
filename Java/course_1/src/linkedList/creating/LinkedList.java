@@ -7,7 +7,7 @@ public class LinkedList {
     private Node tail;
     private int length;
 
-    class Node{
+    static class Node{
         int value;
         Node next;
 
@@ -22,6 +22,33 @@ public class LinkedList {
         tail = newNode;
         length = 1;
     }
+
+
+    //Given an LinkedList (ex: [1 -> 2 -> 3 -> 4 -> 5 -> null]), you must find the
+    //middle node of the list.
+    //You **don't have the length** attribute of the linked list.
+    //Rules:
+    //  - You can **only loop once** through the linked list;
+    //  - You **cannot count** how many nodes exist in the linked list.
+    public Node findMiddleNode(){
+        Node fast = head;
+        Node slow = head;
+
+        while (fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next;
+            fast = fast.next;
+        }
+        System.out.println(slow.value);
+        return slow;
+    }
+
+
+
+
+
+
+
 
     //Appending value to the end of the LinkedList, O(1)
     public boolean appendLast(int value){
@@ -183,9 +210,6 @@ public class LinkedList {
             temp = after;
         }
     }
-
-
-
 
     public void getHead(){
         if(length == 0){

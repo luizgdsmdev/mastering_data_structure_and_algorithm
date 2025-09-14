@@ -5,15 +5,12 @@ public class Main {
 
     public static void main(String[] args){
         LinkedList myLinkedList = new LinkedList(1);
-        myLinkedList.appendLast(2);
         myLinkedList.appendLast(3);
         myLinkedList.appendLast(4);
+        myLinkedList.appendLast(2);
+        myLinkedList.appendLast(2);
 
 
-        myLinkedList.reverseLinkedList();
-        myLinkedList.getHead();
-        myLinkedList.getTail();
-        myLinkedList.getlength();
-        myLinkedList.getlinkedList();
+        myLinkedList.findMiddleNode();
     }
 }
