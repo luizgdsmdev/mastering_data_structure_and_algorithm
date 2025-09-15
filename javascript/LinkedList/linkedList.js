@@ -155,6 +155,66 @@ export class LinkedList {
     return temp;
   }
 
+  //Reverse all node of the LinkedLists, O(n)
+  //No return
+  reverseLinkedList() {
+    let temp = this.head;
+    this.head = this.tail;
+    this.tail = temp;
+    let before = null;
+    let after = null;
+
+    for (let i = 0; i < this.length; i++) {
+      after = temp.next;
+      temp.next = before;
+      before = temp;
+      temp = after;
+    }
+    //         T              H
+    // null <- 1 <- 2 <- 3  4 -> null
+    //                   b  ta
+  }
+
+  //Get middle Node int the Linked list by looping on every node once, O(n)
+  //Return the middle Node value.
+  findMiddleNode() {
+    if (this.length == 0) return null;
+    if (this.length == 1) return this.head;
+    let slow = this.head;
+    let fast = this.head;
+
+    while (fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+
+    return slow.value;
+  }
+
+  //Find if linked list has a loop and the first Node of the loop, o(n)
+  //Return a object with true (or false) and the first node.
+  hasLoop() {
+    if (this.length <= 1) return { hasLoop: false };
+    let nodeLoop = this.getNode(4);
+    this.tail.next = nodeLoop; //Forcing loop
+    let slow = this.head;
+    let fast = this.head;
+
+    while (fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+      if (slow == fast) {
+        slow = this.head;
+        while (slow != fast) {
+          slow = slow.next;
+          fast = fast.next;
+        }
+        return { hasLoop: true, firstNodeOnLoop: slow.value };
+      }
+    }
+    return { hasLoop: false };
+  }
+
   getHead() {
     if (this.length == 0) return null;
     return this.head.value;
