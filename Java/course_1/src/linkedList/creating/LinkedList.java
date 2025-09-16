@@ -53,8 +53,29 @@ public class LinkedList {
     //  You can only traverse the linked list once.
 
     public boolean hasLoop(){
+        Node slow = head;
+        Node fast = head;
+        Node forceloop = getNode(5);
+        forceloop.next = getNode(3);
 
-        return true;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast  = fast.next.next;
+
+            if(slow == fast){
+                slow = head;
+
+                while (slow != fast){
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+
+                System.out.println(slow.value);
+
+                return true;
+            }
+        }
+        return false;
     }
 
 
