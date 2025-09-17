@@ -215,6 +215,27 @@ export class LinkedList {
     return { hasLoop: false };
   }
 
+  //Find a node in the linked list based on an input, counting from the end. O(n)
+  //Return the node or null
+  findKthFromEnd(k) {
+    let fast = this.head;
+    let slow = this.head;
+
+    for (let i = 0; i < k; i++) {
+      if (fast === null) {
+        return null;
+      } else {
+        fast = fast.next;
+      }
+    }
+    while (fast !== null) {
+      slow = slow.next;
+      fast = fast.next;
+    }
+
+    return slow;
+  }
+
   getHead() {
     if (this.length == 0) return null;
     return this.head.value;

@@ -55,8 +55,8 @@ public class LinkedList {
     public boolean hasLoop(){
         Node slow = head;
         Node fast = head;
-        Node forceloop = getNode(5);
-        forceloop.next = getNode(3);
+        Node forceloop = getNode(4);
+        forceloop.next = getNode(2);
 
         while(fast != null && fast.next != null){
             slow = slow.next;

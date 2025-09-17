@@ -14,6 +14,5 @@ myLinkedList.appendLast(2);
 myLinkedList.appendLast(3);
 myLinkedList.appendLast(4);
 myLinkedList.appendLast(5);
-myLinkedList.appendLast(6);
 
 console.log(myLinkedList.hasLoop());
