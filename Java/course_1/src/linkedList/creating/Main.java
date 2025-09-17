@@ -7,10 +7,20 @@ public class Main {
         LinkedList myLinkedList = new LinkedList(1);
         myLinkedList.appendLast(2);
         myLinkedList.appendLast(3);
+        myLinkedList.appendLast(5);
+        myLinkedList.appendLast(2);
         myLinkedList.appendLast(4);
+        myLinkedList.appendLast(3);
+        myLinkedList.appendLast(3);
         myLinkedList.appendLast(5);
 
+        myLinkedList.getlinkedList();
+        myLinkedList.getlength();
+        System.out.println("-------------------");
 
-        System.out.println(myLinkedList.findKthFromEnd(5).value);
+        myLinkedList.removeDuplicates(myLinkedList);
+        myLinkedList.getlinkedList();
+        myLinkedList.getlength();
+
     }
 }

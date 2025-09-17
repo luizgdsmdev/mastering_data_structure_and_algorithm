@@ -1,6 +1,9 @@
 package linkedList.creating;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 //Basic structure for a linked list
 public class LinkedList {
     private Node head;
@@ -78,6 +81,7 @@ public class LinkedList {
         return false;
     }
 
+    //3° CHALLANGE
     // Find Kth Node From End ( ** Interview Question)
     // Implement a member function called findKthFromEnd(k) that finds and returns the kth node from the end of the linked list.
 
@@ -105,7 +109,6 @@ public class LinkedList {
     //Find a node in the linked list based on an input, counting from the end. O(n)
     //Return the node or null
     public Node findKthFromEnd(int k){
-        if(k <= 0 || k > length) return  null;
         Node slow = head;
         Node fast = head;
 
@@ -125,6 +128,39 @@ public class LinkedList {
 
     }
 
+    //4° CHALLANGE
+    //    Remove Duplicates ( ** Interview Question)
+    //    You are given a singly linked list that contains integer values, where some of these values may be duplicated.
+    //
+    //    Note: this linked list class does NOT have a tail which will make this method easier to implement.
+    //
+    //    Your task is to implement a method called removeDuplicates() within the LinkedList class that removes all duplicate values from the list.
+    //    Your method should not create a new list, but rather modify the existing list in-place, preserving the relative order of the nodes.
+    //    You can implement the removeDuplicates() method in two different ways:
+    //
+    //    Using a Set (HashSet) - This approach will have a time complexity of O(n), where n is the number of nodes in the linked list. You are allowed to use the provided Set data structure in your implementation.
+    //    Without using a Set - This approach will have a time complexity of O(n^2), where n is the number of nodes in the linked list. You are not allowed to use any additional data structures for this implementation.
+    //
+    //    Example:
+    //    Input:
+    //    LinkedList: 1 -> 2 -> 3 -> 1 -> 4 -> 2 -> 5
+    //    Output:
+    //    LinkedList: 1 -> 2 -> 3 -> 4 -> 5
+    public LinkedList removeDuplicates(LinkedList linkedList){
+        Set<Integer> listNodes = new HashSet<Integer>();
+        Node temp = head;
+
+        while(temp != null && temp.next != null){
+            listNodes.add(temp.value);
+            if(listNodes.contains(temp.next.value)){
+                temp.next = temp.next.next;
+                length--;
+            }else{
+                temp = temp.next;
+            }
+        }
+        return linkedList;
+    }
 
 
 
