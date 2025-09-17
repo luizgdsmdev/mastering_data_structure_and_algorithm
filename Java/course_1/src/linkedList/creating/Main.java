@@ -11,6 +11,6 @@ public class Main {
         myLinkedList.appendLast(5);
 
 
-        System.out.println(myLinkedList.hasLoop());
+        System.out.println(myLinkedList.findKthFromEnd(5).value);
     }
 }
