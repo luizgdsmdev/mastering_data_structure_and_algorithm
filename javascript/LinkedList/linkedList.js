@@ -16,7 +16,8 @@ export class LinkedList {
   //Append an new node to the end of the linked list, O(1);
   //return the Node VALUE when true or null when false
   appendLast(value) {
-    if (!value) return null;
+    //Adding rule fot value == 0, for 'binaryToDecimal' function
+    if (!value && value != 0) return null;
     const newNode = new Node(value);
     if (this.length == 0) {
       //Edge case for 0 node, set the head.next to right position
@@ -234,6 +235,38 @@ export class LinkedList {
     }
 
     return slow;
+  }
+
+  //Removes duplicated Nodes in a Linked list using a hashSet as auxiliar, O(n)
+  //Return null if has no duplicates, if has will remove and alter the original linked list
+  removeDuplicates() {
+    if (this.length == 0 || this.length == 1) return null;
+
+    let temp = this.head;
+    let mySet = new Set();
+
+    while (temp.next != null) {
+      mySet.add(temp.value);
+      if (mySet.has(temp.next.value)) {
+        temp.next = temp.next.next;
+        this.length--;
+      } else {
+        temp = temp.next;
+      }
+    }
+  }
+
+  //Conversion from Node values to binary equivalent, O(n)
+  // return the sum (binary converted)
+  binaryToDecimal() {
+    let sum = 0;
+    let temp = this.head;
+    for (let i = 0; i < this.length; i++) {
+      sum = sum * 2 + temp.value;
+      temp = temp.next;
+    }
+
+    return sum;
   }
 
   getHead() {
