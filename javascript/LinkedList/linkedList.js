@@ -269,6 +269,32 @@ export class LinkedList {
     return sum;
   }
 
+  partitionList(x) {
+    if (this.length < 2) return null;
+    let lesserH = new Node(0);
+    let greaterH = new Node(0);
+    let lesserT = lesserH;
+    let greaterT = greaterH;
+    let temp = this.head;
+
+    while (temp != null) {
+      if (temp.value < x) {
+        lesserT.next = temp;
+        lesserT = temp;
+        if (!lesserH.next) lesserH.next = temp;
+      } else {
+        greaterT.next = temp;
+        greaterT = temp;
+      }
+
+      temp = temp.next;
+    }
+
+    greaterT.next = null;
+    lesserT.next = greaterH.next;
+    this.head = lesserH.next;
+  }
+
   getHead() {
     if (this.length == 0) return null;
     return this.head.value;
