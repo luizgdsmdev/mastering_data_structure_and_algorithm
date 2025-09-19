@@ -39,29 +39,42 @@
 // Output: 0
 // Subarray: [0]
 
-const case1 = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
-const case2 = [-2, -3, -1, -5];
-const case3 = [5];
-const case4 = [1, 2, 3, 4];
-const case5 = [5, 4, -10, 2, 3];
-const case6 = [3, -2, 5, -1, -2, 6, -3];
-const case7 = [-3, -2, 1, 5, 6];
-const case8 = [-2, 0, -1, 0, -3];
+const case1 = [-2, 1, -3, 4, -1, 2, 1, -5, 4]; //[4, -1, 2, 1];
+const case2 = [-2, -3, -1, -5]; //[-1];
+const case3 = [5]; //[5];
+const case4 = [1, 2, 3, 4]; //[1, 2, 3, 4];
+const case5 = [5, 4, -10, 2, 3]; //[5, 4];
+const case6 = [3, -2, 5, -1, -2, 6, -3]; //[3, -2, 5, -1, -2, 6];
+const case7 = [-3, -2, 1, 5, 6]; //[1, 5, 6];
+const case8 = [-2, 0, -1, 0, -3]; //[0];
 
 function findSubArray(input) {
-  if (input.length === 0) return null;
-  if (input.length === 1) return input[0];
-
-  let max_count = input[0];
-  let curr_count = input[0];
+  let max = input[0];
+  let curr = input[0];
+  let head = 0;
+  let tail = 0;
+  let finalHead = 0;
+  let subArray = [];
 
   for (let i = 1; i < input.length; i++) {
-    max_count =
-      input[i] > max_count + input[i] ? input[i] : max_count + input[i];
-    curr_count = curr_count > max_count ? curr_count : max_count;
-  }
+    if (input[i] > max + input[i]) {
+      max = input[i];
+      head = i;
+    } else {
+      max += input[i];
+    }
 
-  return curr_count;
+    if (curr < max) {
+      curr = max;
+      tail = i;
+      finalHead = head;
+    }
+  }
+  subArray = input.slice(finalHead, tail + 1);
+  return { Sum: curr, subArray: subArray };
 }
 
-console.log(findSubArray(case8));
+let response = findSubArray(case4);
+console.log(
+  `The sum of ${response.Sum} is related to the subArray [ ${response.subArray} ].`
+);

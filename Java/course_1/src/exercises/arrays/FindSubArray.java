@@ -1,19 +1,35 @@
 package exercises.arrays;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class FindSubArray {
 
-    FindSubArray(){
 
-    }
-
-public int getSum(int[] array){
-    int max = array[0];
+public void FindSubArray(int[] array){
+    int sum = array[0];
     int current = array[0];
+    int head = 0;
+    int tail = 0;
+    int finalHead = 0;
+    int[] subArray;
 
     for(int i = 1; i < array.length; i++){
-        max = Math.max(array[i], max + array[i]);
-        current = Math.max(current, max);
+        if(array[i] > (sum + array[i])){
+            sum = array[i];
+            head = i;
+        }else{
+            sum += array[i];
+        }
+
+        if(current < sum){
+            current = sum;
+            tail = i;
+            finalHead = head;
+        }
     }
-    return current;
+    subArray = Arrays.copyOfRange(array, finalHead, tail + 1);
+    System.out.println("Sum: " + current);
+    System.out.println("SubArray: " + Arrays.toString(subArray));
 }
 }
