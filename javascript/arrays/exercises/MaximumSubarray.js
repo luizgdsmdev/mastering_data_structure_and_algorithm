@@ -50,29 +50,18 @@ const case8 = [-2, 0, -1, 0, -3];
 
 function findSubArray(input) {
   if (input.length === 0) return null;
-  if (input.length === 1) return { Output: input[0], subarray: [input[0]] };
+  if (input.length === 1) return input[0];
 
   let max_count = input[0];
   let curr_count = input[0];
 
   for (let i = 1; i < input.length; i++) {
-    if (input[i] > max_count + input[i]) {
-      max_count = input[i];
-      head = i;
-    } else {
-      max_count += input[i];
-    }
-
-    if (curr_count > max_count) {
-      curr_count = curr_count;
-      tail = i - 1;
-    } else {
-      curr_count = max_count;
-      tail = i;
-    }
+    max_count =
+      input[i] > max_count + input[i] ? input[i] : max_count + input[i];
+    curr_count = curr_count > max_count ? curr_count : max_count;
   }
 
   return curr_count;
 }
 
-console.log(findSubArray(case4));
+console.log(findSubArray(case8));
