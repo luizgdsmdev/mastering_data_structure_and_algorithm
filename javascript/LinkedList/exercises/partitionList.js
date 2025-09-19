@@ -71,7 +71,7 @@ console.log(myLinkedList.getLinkedList());
 // myLinkedList.appendLast(5);
 // myLinkedList.appendLast(2);
 
-// // Input: Linked List: 1 -> 4 -> 3 -> 2 -> 5 -> 2 x: 3
-// // Output: Linked List: 1 -> 2 -> 2 -> 4 -> 3 -> 5
+// Input: Linked List: 1 -> 4 -> 3 -> 2 -> 5 -> 2 x: 3
+// Output: Linked List: 1 -> 2 -> 2 -> 4 -> 3 -> 5
 // console.log(myLinkedList.partitionList(3));
 // console.log(myLinkedList.getLinkedList());

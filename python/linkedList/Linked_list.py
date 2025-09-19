@@ -208,6 +208,56 @@ class LinkedList:
             else:
                 temp = temp.next;
     
+    #Conversion from Node values to binary equivalent, O(n)
+    #return the sum (binary converted)
+    def binaryToDecimal(self):
+        if self.length == 0: return 0;
+        sum = 0;
+        temp = self.head;
+        for i in range(self.length):
+            sum = (sum * 2) + temp.value;
+            temp = temp.next;
+        return sum; 
+    
+    #Re-ordering the Linked list based on X value input, separating lesser and greater nodes compared to X value
+    #but not changing the node index compare to it's original position, O(n)
+    def partitionList(self, x):
+        if self.length == 0: return None;
+        if self.length == 1: return self.head;
+        
+        temp = self.head;
+        lesserH = Node(0);
+        lesserT = lesserH;
+        greaterH = Node(0);
+        greaterT = greaterH;
+        
+        while(temp != None):
+            if(temp.value < x):
+                if(lesserT == lesserH):
+                    lesserH.next = temp;
+                else:
+                    lesserT.next = temp;
+                lesserT = temp;
+            else:
+                if(greaterT == greaterH):
+                    greaterH.next = temp;
+                else:
+                    greaterT.next = temp;
+                greaterT = temp;
+            temp = temp.next;
+        
+        if(lesserH != lesserT):
+            self.head = lesserH.next;
+            if(greaterH != greaterT):
+                lesserT.next = greaterH.next;
+                greaterT.next = None;
+        else:
+            self.head = greaterH.next;
+            greaterT.next = None;
+                
+                    
+        
+        
     def getTail(self):
         if self.length == 0: print("Head: None")
         else:

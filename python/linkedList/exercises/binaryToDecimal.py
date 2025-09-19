@@ -24,17 +24,23 @@
 # Move to the next node and repeat until you've visited all nodes.
 # Return the value in num, which now represents the decimal value of the binary number in the linked list.
 
+# Other cases:
+#     - Convert 1011 to 11;
+#     - Convert 1100 to 12;
+#     - Convert 1 to 1;
+#     - Convert empty list to 0;
+
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Linked_list import LinkedList
 
 my_list = LinkedList(1);
+my_list.appendLast(1);
 my_list.appendLast(0);
-my_list.appendLast(1);
-my_list.appendLast(1);
+my_list.appendLast(0);
 
-my_list.removeDuplicates();
-my_list.getlinkedList();
+print(my_list.binaryToDecimal());
+
 
 
