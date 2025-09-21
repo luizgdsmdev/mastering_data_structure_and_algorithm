@@ -16,3 +16,27 @@ function SortedSquaredArray(input) {
 }
 
 console.log(SortedSquaredArray(case4));
+
+//Sorting mannualy, using two pointers approach
+function SortedSquaredArrayM(input) {
+  const n = input.length;
+  const newArray = new Array(n);
+  let left = 0;
+  let rigth = n - 1;
+  let write_pointer = n - 1;
+
+  while (write_pointer >= 0) {
+    if (Math.abs(input[left]) > Math.abs(input[rigth])) {
+      newArray[write_pointer] = input[left] * input[left];
+      left++;
+    } else {
+      newArray[write_pointer] = input[rigth] * input[rigth];
+      rigth--;
+    }
+    write_pointer--;
+  }
+
+  return newArray;
+}
+
+console.log(SortedSquaredArrayM(case1));
