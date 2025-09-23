@@ -9,9 +9,8 @@ public class Main {
         myLinkedList.appendLast(3);
         myLinkedList.appendLast(4);
         myLinkedList.appendLast(5);
-        myLinkedList.appendLast(6);
 
-        myLinkedList.reverseBetween(2,4);
+        myLinkedList.swapPairs();
         myLinkedList.getlinkedList();
 
     }
