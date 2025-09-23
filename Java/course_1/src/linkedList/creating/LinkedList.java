@@ -247,30 +247,117 @@ public class LinkedList {
 
 // Note:
 // You must solve the problem WITHOUT MODIFYING THE VALUES in the list's nodes (i.e., only the nodes' next pointers may be changed.)
-    public void partitionList(int x){
-        Node lesserH = new Node(0);
-        Node greaterH = new Node(0);
-        Node lesserT = lesserH;
-        Node greaterT = greaterH;
+public void partitionList(int x){
+
+        Node lessHead = new Node(0);
+        Node greaterHead = new Node(0);
+        Node lessTail = lessHead;
+        Node greaterTail = greaterHead;
         Node temp = head;
 
         while(temp != null){
             if(temp.value < x){
-                lesserT.next = temp;
-                lesserT = temp;
+                lessTail.next = temp;
+                lessTail = temp;
             }else{
-                greaterT.next = temp;
-                greaterT = temp;
+                greaterTail.next = temp;
+                greaterTail = temp;
             }
             temp = temp.next;
         }
 
-        greaterT.next = null;
-        lesserT.next = greaterH.next;
-        head = lesserH.next;
+        if(lessHead.next != null){
+            head = lessHead.next;
+            if(greaterHead.next != null) lessTail.next = greaterHead.next;
+        }else{
+            head = greaterHead.next;
+        }
+
     }
 
+//    LL: Reverse Between ( ** Interview Question)
+//⚠️  Advanced Challenge Alert: Linked List Mastery!
+//    Welcome to what many consider the pinnacle of Linked List challenges in this course! This exercise is not just a test of your coding skills, but also a measure of your problem-solving ability and understanding of complex data structures.
+//    Here's how you can tackle it:
+//    Visualize the Problem: Before diving into coding, grab a pen and paper. Sketch out the linked list and visualize each step of the process. This approach isn't just for beginners; it's exactly how seasoned developers plan their attack on complex problems.
+//    Seek Understanding Over Speed: Take your time to really grasp each part of the problem. The goal here is deep understanding, not just a quick solution. If you find yourself stuck, that's a part of the learning process.
+//    It's Okay to Take a Break: Feel free to step away from this challenge and return later. This course is designed to equip you with a growing set of skills, and sometimes, a bit of distance can bring new insights.
+//    Approach Like a Pro: Remember, facing a challenging problem is what being a professional developer is all about. Use this exercise to think, plan, and code like a pro.
+//    Now, let's dive into the exercise:
+//
+//    ___________________________________
+//
+//    In the LinkedList class, implement a method called reverseBetween that reverses the nodes of the list between indexes startIndex and endIndex (inclusive).
+//    It's important to note that you should only rearrange the nodes themselves, not just their values.
+//    Note:  The Linked List does NOT have a tail which will make the implementation easier.
+//    Assumption: You can assume that startIndex and endIndex are not out of bounds.
+//    The method should have the following signature:
+//
+//    public void reverseBetween(int m, int n) {
+//        // Your implementation here
+//    }
+//
+//    The method should not return any value, and it should modify the original linked list.
+//    The positions startIndex and endIndex are 0-indexed.
+//
+//
+//
+//    Example:
+//    Given the following linked list: 1 -> 2 -> 3 -> 4 -> 5
+//    Calling reverseBetween(1, 3) should result in the following modified linked list: 1 -> 4 -> 3 -> 2 -> 5
+//    I highly recommend that you draw the Linked List out on a piece of paper so you can visualize the steps.
+//
+//    Notes:
+//    The method should not duplicate any of the existing nodes, only rearranging the existing nodes in the list.
+//    However, the creation of a limited number of new nodes is allowed (e.g., dummy nodes to facilitate the partitioning process).
+//    The method should not use any extra data structures such as arrays or lists.
+//    Test Case 2: Reverse Entire ListInput: Linked List: 1 -> 2 -> 3 -> 4 -> 5
+//    m = 0, n = 4
+//    Expected Output: Linked List: 5 -> 4 -> 3 -> 2 -> 1
+//
+//    Test Case 3: Reverse Single NodeInput: Linked List: 1 -> 2 -> 3 -> 4 -> 5
+//    m = 2, n = 2
+//    Expected Output: Linked List: 1 -> 2 -> 3 -> 4 -> 5
+//
+//    Test Case 4: Reverse First Two NodesInput: Linked List: 1 -> 2 -> 3 -> 4
+//    m = 0, n = 1
+//    Expected Output: Linked List: 2 -> 1 -> 3 -> 4
+//
+//    Test Case 5: Reverse Last Two NodesInput: Linked List: 1 -> 2 -> 3 -> 4
+//    m = 2, n = 3
+//    Expected Output: Linked List: 1 -> 2 -> 4 -> 3
+//
+//    Test Case 6: Single Node ListInput: Linked List: 1
+//    m = 0, n = 0
+//    Expected Output: Linked List: 1
+//
+//    Test Case 7: Reverse Middle SectionInput: Linked List: 1 -> 2 -> 3 -> 4 -> 5 -> 6
+//    m = 2, n = 4
+//    Expected Output: Linked List: 1 -> 2 -> 5 -> 4 -> 3 -> 6
 
+
+    public void reverseBetween(int startIndex, int endIndex){
+        if(endIndex > length || startIndex < 0) return;
+        Node toMove = null;
+        Node dummy = new Node(0);
+        dummy.next = head;
+        head = dummy;
+        Node temp = head.next;
+        Node prev = dummy;
+
+        for(int i = 0; i < startIndex; i++){
+            prev = temp;
+            temp = temp.next;
+        }
+
+        for(int i = 0; i < (endIndex - startIndex); i++){
+            toMove = temp.next;
+            temp.next = toMove.next;
+            toMove.next = prev.next;
+            prev.next = toMove;
+        }
+        head = head.next;
+    }
 
 
     //Appending value to the end of the LinkedList, O(1)

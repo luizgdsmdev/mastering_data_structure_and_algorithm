@@ -3,10 +3,8 @@ import { LinkedList } from "./linkedList.js";
 const myLinkedList = new LinkedList(1);
 myLinkedList.appendLast(2);
 myLinkedList.appendLast(3);
-myLinkedList.appendLast(7);
-myLinkedList.reverseLinkedList();
+myLinkedList.appendLast(4);
+myLinkedList.appendLast(5);
+myLinkedList.reverseBetween(1, 3);
 
-console.log("Head: " + myLinkedList.getHead());
-console.log("tail: " + myLinkedList.getTail());
-console.log("length: " + myLinkedList.getlength());
 console.log(myLinkedList.getLinkedList());

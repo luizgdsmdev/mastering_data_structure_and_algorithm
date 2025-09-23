@@ -295,6 +295,11 @@ export class LinkedList {
     this.head = lesserH.next;
   }
 
+  reverseBetween(start, end) {
+    let prev = this.head;
+    let current = prev.next;
+  }
+
   getHead() {
     if (this.length == 0) return null;
     return this.head.value;
