@@ -378,6 +378,7 @@ public void partitionList(int x){
 //    How to perform in-place node swaps
 //    How to traverse a linked list using multiple pointers
     public void swapPairs(){
+        if(head == null || head.next == null) return;
         Node dummy = new Node(0);
         dummy.next = head;
         head = dummy;
