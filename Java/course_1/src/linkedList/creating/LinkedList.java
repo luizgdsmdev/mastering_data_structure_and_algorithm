@@ -389,6 +389,7 @@ public void partitionList(int x){
             if(nodeB.next == null){
                 nodeB.next = nodeA;
                 prev.next = nodeB;
+                nodeA.next = null;
                 break;
             }else{
                 nodeA.next = nodeB.next;
