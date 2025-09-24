@@ -338,25 +338,25 @@ public void partitionList(int x){
 
     public void reverseBetween(int startIndex, int endIndex){
         if(endIndex > length || startIndex < 0) return;
-        Node toMove = null;
         Node dummy = new Node(0);
         dummy.next = head;
-        head = dummy;
-        Node temp = head.next;
         Node prev = dummy;
-
-        for(int i = 0; i < startIndex; i++){
+        Node temp = head;
+        Node after = null;
+        
+        for(int i = 0; i < startIndex; i++){    
             prev = temp;
             temp = temp.next;
         }
 
         for(int i = 0; i < (endIndex - startIndex); i++){
-            toMove = temp.next;
-            temp.next = toMove.next;
-            toMove.next = prev.next;
-            prev.next = toMove;
+            after = temp.next;
+            temp.next = after.next;
+            after.next = prev.next;
+            prev.next = after;
         }
-        head = head.next;
+
+        head = dummy.next;
     }
 
 //    Swap Nodes in Pairs ( **Interview Question)

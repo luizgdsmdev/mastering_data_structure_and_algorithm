@@ -10,7 +10,7 @@ public class Main {
         myLinkedList.appendLast(4);
         myLinkedList.appendLast(5);
 
-        myLinkedList.swapPairs();
+        myLinkedList.reverseBetween(0,4);
         myLinkedList.getlinkedList();
 
     }
