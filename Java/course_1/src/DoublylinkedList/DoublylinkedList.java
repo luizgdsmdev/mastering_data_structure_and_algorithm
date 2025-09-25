@@ -267,4 +267,59 @@ public class DoublylinkedList {
        head = tail;
        tail = temp;
     }
+
+//    Partition List ( ** Interview Question)
+//    Write a method called partitionList that rearranges the nodes in a doubly linked list so that all nodes
+//    with values less than a given number x come before nodes greater than or equal to x.
+//    This must be done by relinking the existing nodes (not by creating new ones). The method should update both
+//    .next and .prev pointers correctly.
+//    The relative order of nodes within each partition must be preserved.
+//
+//    Example Inputs and Outputs:
+//    Input:  3 <-> 8 <-> 5 <-> 10 <-> 2 <-> 1, x = 5
+//    Output: 3 <-> 2 <-> 1 <-> 8 <-> 5 <-> 10
+//
+//    Input: 1 <-> 2 <-> 3, x = 5
+//    Output: 1 <-> 2 <-> 3
+//
+//    Input: 6 <-> 7 <-> 8, x = 5
+//    Output: 6 <-> 7 <-> 8
+    public void partitionList(int x){
+        Node lessDummy = new Node(0);
+        Node less = lessDummy;
+
+        Node greaterDummy = new Node(0);
+        Node greater = greaterDummy;
+        Node temp = head;
+
+        while(temp != null){
+            if(temp.value < x){
+                less.nextNode = temp;
+                temp.prevNode = less;
+                less = temp;
+            }else{
+                greater.nextNode = temp;
+                temp.prevNode = greater;
+                greater = temp;
+            }
+            temp = temp.nextNode;
+        }
+
+        if(lessDummy.nextNode != null){
+            head = lessDummy.nextNode;
+
+            if(greaterDummy.nextNode != null){
+                less.nextNode = greaterDummy.nextNode;
+                tail = greater;
+            }else{
+                tail = less;
+            }
+        }else{
+            head = greaterDummy.nextNode;
+            tail = greater;
+        }
+
+        head.prevNode = null;
+        tail.nextNode = null;
+    }
 }
