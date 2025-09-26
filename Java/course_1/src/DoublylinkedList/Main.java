@@ -8,10 +8,8 @@ public class Main {
     myDoublylinkedList.append(3);
     myDoublylinkedList.append(4);
     myDoublylinkedList.append(5);
-//    myDoublylinkedList.append(6);
-//    myDoublylinkedList.append(7);
 
-    myDoublylinkedList.ReverseBetween(1,4);
+    myDoublylinkedList.swapPairs();
     myDoublylinkedList.getHead();
     myDoublylinkedList.getTail();
     myDoublylinkedList.getDoublyLinkedList();
