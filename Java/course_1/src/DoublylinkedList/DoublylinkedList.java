@@ -9,8 +9,8 @@ public class DoublylinkedList {
 
     class Node{
         public int value;
-        public Node nextNode;
-        public Node prevNode;
+        public Node next;
+        public Node prev;
 
         Node(int value){
             this.value = value;
@@ -20,8 +20,8 @@ public class DoublylinkedList {
 
     DoublylinkedList(int value){
         Node newNode = new Node(value);
-        newNode.nextNode = null;
-        newNode.prevNode = null;
+        newNode.next = null;
+        newNode.prev = null;
         head = newNode;
         tail = newNode;
         length = 1;
@@ -31,19 +31,19 @@ public class DoublylinkedList {
         Node newNode = new Node(value);
 
         if(length == 0){
-            newNode.nextNode = null;
-            newNode.prevNode = null;
+            newNode.next = null;
+            newNode.prev = null;
             head = newNode;
             tail = newNode;
         }
 
         if(length == 1){
-            head.nextNode = newNode;
-            newNode.prevNode = head;
+            head.next = newNode;
+            newNode.prev = head;
             tail = newNode;
         }else{
-            tail.nextNode = newNode;
-            newNode.prevNode = tail;
+            tail.next = newNode;
+            newNode.prev = tail;
             tail = newNode;
         }
 
@@ -59,9 +59,9 @@ public class DoublylinkedList {
             head = null;
             tail = null;
         }else{
-            tail = temp.prevNode;
-            tail.nextNode = null;
-            temp.prevNode = null;
+            tail = temp.prev;
+            tail.next = null;
+            temp.prev = null;
         }
 
         length--;
@@ -72,21 +72,21 @@ public class DoublylinkedList {
         Node newNode = new Node(value);
 
         if(length == 0){
-            newNode.nextNode = null;
-            newNode.prevNode = null;
+            newNode.next = null;
+            newNode.prev = null;
             head = newNode;
             tail = newNode;
         }
 
         if(length == 1){
-            newNode.prevNode = null;
-            newNode.nextNode = tail;
-            tail.prevNode = newNode;
+            newNode.prev = null;
+            newNode.next = tail;
+            tail.prev = newNode;
             head = newNode;
         }else{
-            newNode.nextNode = head;
-            head.prevNode = newNode;
-            newNode.prevNode = null;
+            newNode.next = head;
+            head.prev = newNode;
+            newNode.prev = null;
             head = newNode;
         }
 
@@ -102,9 +102,9 @@ public class DoublylinkedList {
             head = null;
             tail = null;
         }else{
-            head = head.nextNode;
-            head.prevNode = null;
-            temp.nextNode = null;
+            head = head.next;
+            head.prev = null;
+            temp.next = null;
         }
 
         length--;
@@ -119,7 +119,7 @@ public class DoublylinkedList {
         Node temp = head;
 
         for(int i = 0; i < index; i++){
-            temp = temp.nextNode;
+            temp = temp.next;
         }
 
         return temp;
@@ -134,7 +134,7 @@ public class DoublylinkedList {
         }else{
             Node temp = head;
             for(int i = 0; i < index; i++){
-                temp = temp.nextNode;
+                temp = temp.next;
             }
             temp.value = value;
         }
@@ -150,11 +150,11 @@ public class DoublylinkedList {
         if(index == 0){
             prepend(value);
         }else{
-            Node prev = temp.prevNode;
-            newNode.nextNode = temp;
-            newNode.prevNode = prev;
-            temp.prevNode = newNode;
-            prev.nextNode = newNode;
+            Node prev = temp.prev;
+            newNode.next = temp;
+            newNode.prev = prev;
+            temp.prev = newNode;
+            prev.next = newNode;
         }
 
         length++;
@@ -167,11 +167,11 @@ public class DoublylinkedList {
         if(index == (length - 1)) return removeLast();
 
         Node temp = get(index);
-        Node prev = temp.prevNode;
-        prev.nextNode = temp.nextNode;
-        temp.nextNode.prevNode = prev;
-        temp.nextNode = null;
-        temp.prevNode = null;
+        Node prev = temp.prev;
+        prev.next = temp.next;
+        temp.next.prev = prev;
+        temp.next = null;
+        temp.prev = null;
 
         length--;
         return temp;
@@ -198,7 +198,7 @@ public class DoublylinkedList {
 
         while(temp != null){
             System.out.println(temp.value);
-            temp = temp.nextNode;
+            temp = temp.next;
         }
     }
 
@@ -220,8 +220,8 @@ public class DoublylinkedList {
             if(head.value != tail.value){
                 return false;
             }
-            head = head.nextNode;
-            tail = tail.prevNode;
+            head = head.next;
+            tail = tail.prev;
         }
         return true;
     }
@@ -253,19 +253,18 @@ public class DoublylinkedList {
 //    Length: 5
 //    Doubly Linked List: 5 <-> 4 <-> 3 <-> 2 <-> 1
     public void reverse() {
-       Node crr = head;
        Node temp = null;
+       Node crr = head;
 
        while(crr != null){
-           temp = crr.prevNode;
-           crr.prevNode = crr.nextNode;
-           crr.nextNode = temp;
-           crr = crr.prevNode;
+           temp = crr.prev;
+           crr.prev = crr.next;
+           crr.next = temp;
+           crr = crr.prev;
        }
-
-       temp = head;
-       head = tail;
-       tail = temp;
+        temp = head;
+        head = tail;
+        tail = temp;
     }
 
 //    Partition List ( ** Interview Question)
@@ -285,41 +284,88 @@ public class DoublylinkedList {
 //    Input: 6 <-> 7 <-> 8, x = 5
 //    Output: 6 <-> 7 <-> 8
     public void partitionList(int x){
-        Node lessDummy = new Node(0);
-        Node less = lessDummy;
-
-        Node greaterDummy = new Node(0);
-        Node greater = greaterDummy;
         Node temp = head;
+        Node dless = new Node(0);
+        Node dGreat = new Node(0);
+        Node less = dless;
+        Node great = dGreat;
 
         while(temp != null){
             if(temp.value < x){
-                less.nextNode = temp;
-                temp.prevNode = less;
+                less.next = temp;
+                temp.prev = less;
                 less = temp;
             }else{
-                greater.nextNode = temp;
-                temp.prevNode = greater;
-                greater = temp;
+                great.next = temp;
+                temp.prev = great;
+                great = temp;
             }
-            temp = temp.nextNode;
+            temp = temp.next;
         }
 
-        if(lessDummy.nextNode != null){
-            head = lessDummy.nextNode;
-
-            if(greaterDummy.nextNode != null){
-                less.nextNode = greaterDummy.nextNode;
-                tail = greater;
+        if(dless.next != null){
+            head = dless.next;
+            if(dGreat.next != null){
+                less.next = dGreat.next;
+                tail = great;
             }else{
                 tail = less;
             }
         }else{
-            head = greaterDummy.nextNode;
-            tail = greater;
+            head = dGreat.next;
+            tail = great;
+        }
+        tail.next = null;
+    }
+
+//    Reverse Between ( ** Interview Question)
+//    Reverse a portion of a doubly linked list (DLL).
+//    Write a method that takes two indices (startIndex, endIndex) and reverses the nodes between those indices.
+//    The original list must be modified in place.
+//
+//    Constraints:
+//    startIndex and endIndex are zero-based.
+//    The list may be empty or contain a single node.
+//    If startIndex == endIndex, no changes should occur.
+//    You must maintain the integrity of both next and prev pointers.
+
+    public boolean ReverseBetween(int startindex, int endIndex){
+        if(length <= 1 || endIndex > (length - 1) || startindex < 0 || startindex == endIndex || startindex > endIndex) return false;
+
+        Node dummyStart = new Node(0);
+        Node dummyEnd = new Node(0);
+        dummyStart.next = head;
+        head.prev = dummyStart;
+        Node tg = head;
+        Node pTg = tg.prev;
+        Node after = null;
+        Node temp = null;
+        tail.next = dummyEnd;
+        dummyEnd.prev = tail;
+
+        for(int i = 0; i < startindex; i++){
+            pTg = tg;
+            tg = tg.next;
         }
 
-        head.prevNode = null;
-        tail.nextNode = null;
+        for(int i = 0; i < (endIndex - startindex); i++){
+               after = tg.next;
+               temp = pTg.next;
+               pTg.next = after;
+               after.prev = pTg;
+
+               tg.next = after.next;
+               after.next.prev = tg;
+
+               after.next = temp;
+               temp.prev = after;
+        }
+
+
+        head = dummyStart.next;
+        dummyEnd.prev.next = dummyEnd.next;
+        tail = dummyEnd.prev;
+
+        return true;
     }
 }

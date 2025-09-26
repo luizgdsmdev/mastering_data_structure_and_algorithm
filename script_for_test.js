@@ -1,41 +1,17 @@
-var longestCommonPrefix = function (strs) {
-  if (strs.length <= 1) return "" + strs;
+let array = [1, 2, 3, 4, 5];
 
-  let start = 0;
-  let final = 1;
-  let stringReturn = "";
-  let controller = false;
-
-  for (let i = 0; i < strs[start].length; i++) {
-    if (strs[final][i] == strs[start][i]) {
-      stringReturn += strs[start][i];
-    } else {
-      break;
-    }
-  }
+function teste(index, finalIndex) {
+  let start = index;
+  let final = finalIndex;
 
   while (start < final) {
-    if (
-      !strs[start].includes(stringReturn) &&
-      !strs[final].includes(stringReturn)
-    ) {
-      controller = true;
-    }
+    let temp = array[finalIndex];
+    array[finalIndex] = array[index];
+    array[index] = temp;
 
-    start++;
-    final--;
+    index++;
+    finalIndex--;
   }
-
-  return controller ? "" : stringReturn;
-};
-
-strs = ["flower", "flow", "flight"];
-//["cir", "car"]; "c"
-//["c","c"]; "c"
-//["flower", "flower","flower","flower","flower"]; "flower"
-//["a"]; "a"
-//["aa","ab"]; "a"
-//["aa","aa"]; "aa"
-//["aaa", "aa", "aaa"]; "aa"
-
-console.log(longestCommonPrefix(strs));
+}
+teste(2, 3);
+console.log(array);
