@@ -42,18 +42,21 @@ public class Stack {
         return temp;
     }
 
-    public void getTop(){
-        if(height == 0) System.out.println("Top: null");
-        if(height >= 1) System.out.println("Top: " + top.value);
+    public Node getTop(){//Commented for sort exerc_3, uncomment for standard use
+//        if(height == 0) System.out.println("Top: null");
+//        if(height >= 1) System.out.println("Top: " + top.value);
+        if(top != null) return top;
+        else return null;
     }
 
-    public void getHeight(){
-        if(height == 0) System.out.println("Length: null");
-        if(height >= 1) System.out.println("Length: " + height);
+    public int getHeight(){//Commented for sort exerc_3, uncomment for standard use
+//        if(height == 0) System.out.println("Length: null");
+//        if(height >= 1) System.out.println("Length: " + height);
+        return height;
     }
 
     public void getStack(){
-        if(height == 0) System.out.println("Stack: null");
+        if(height == 0) System.out.println("Stack: empty");
         if(height >= 1){
             Node temp = top;
 
@@ -63,4 +66,38 @@ public class Stack {
             }
         }
     }
+
+    public void sortStack(Stack toSort){
+        if(toSort.getHeight() <= 1) return;
+
+        Stack newStack = new Stack(0);
+        newStack.pop();
+
+        while(toSort.getHeight() >= 0) {
+            if (toSort.getHeight() == 0) break;
+            Node temp = toSort.pop();
+            if (newStack.getTop() != null) {
+                if (temp.value < newStack.getTop().value) {
+                    Node inner = newStack.pop();
+                    while (inner != null && temp.value < inner.value) {
+                        toSort.push(inner.value);
+                        inner = newStack.pop();
+                    }
+
+                    if (inner != null) newStack.push(inner.value);
+                    newStack.push(temp.value);
+
+                } else {
+                    newStack.push(temp.value);
+                }
+            } else {
+                newStack.push(temp.value);
+            }
+        }
+
+        while(newStack.getHeight() > 0){
+            toSort.push(newStack.pop().value);
+        }
+    }
+
 }
