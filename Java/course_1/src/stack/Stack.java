@@ -100,4 +100,34 @@ public class Stack {
         }
     }
 
+    public void enqueue(int value){
+        if(height == 0){
+            this.push(value);
+        }else{
+            Stack newStack1 = new Stack(0);
+            Stack newStack2 = new Stack(0);
+            newStack1.pop();
+            newStack2.pop();
+
+            newStack1 = this;
+
+            while(newStack1.getHeight() != 0){
+                newStack2.push(newStack1.pop().value);
+            }
+            newStack2.push(value);
+
+            while(newStack2.getHeight() != 0){
+                this.push(newStack2.pop().value);
+            }
+        }
+
+
+
+    }
+
+    public Node dequeue(){
+        if(height == 0) return null;
+        return this.pop();
+    }
+
 }
