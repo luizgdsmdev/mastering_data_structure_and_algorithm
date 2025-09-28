@@ -13,6 +13,7 @@ public class BinaryTree {
         }
     }
 
+    //Instantiates the Binary tree only with an argument
     BinaryTree(int value){
         root = new Node(value);
         root.right = null;
