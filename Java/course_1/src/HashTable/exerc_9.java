@@ -23,9 +23,9 @@ public class exerc_9 {
         if(input.length == 1) return 1;
         if(input.length == 0) return 0;
 
-        Set<Integer> mySet = new HashSet<>();
-        int temp = 0;
+        Set<Integer> mySet = new HashSet<Integer>();
         int crr = 0;
+        int temp;
 
         for(int num: input){
             mySet.add(num);
@@ -39,8 +39,8 @@ public class exerc_9 {
                     holder++;
                     temp++;
                 }
+                crr = Math.max(crr, temp);
             }
-            crr = Math.max(crr, temp);
         }
 
         return crr;
