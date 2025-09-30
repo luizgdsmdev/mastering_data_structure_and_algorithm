@@ -40,9 +40,8 @@ public class exerc_8 {
 
     public static List<int[]> findPairs(int[] input1, int[] input2, int target){
 
-        Set<Integer> mySet = new HashSet<>();
-        List<int[]> output = new ArrayList<>();
-
+        Set<Integer> mySet = new HashSet<Integer>(input1.length);
+        List<int[]> output = new ArrayList<int[]>();
         for(int num: input1){
             mySet.add(num);
         }
@@ -54,6 +53,7 @@ public class exerc_8 {
         }
 
         return output;
+
     }
 
 
