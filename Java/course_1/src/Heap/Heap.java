@@ -32,6 +32,41 @@ public class Heap {
         return true;
     }
 
+    public boolean remove(){
+        int first = heap.getFirst();
+        int last = heap.getLast();
+        heap.set(0, last);
+        heap.removeFirst();
+        boolean SinkResponse = Sink(0);
+
+        //BackUp in case Sink returns false
+        if(SinkResponse) return true;
+        else{
+            heap.set(0, first);
+            heap.add(last);
+            return false;
+        }
+    }
+
+    public boolean Sink(int index){
+        while(true){
+            Integer right = getRightChild(index);
+            Integer left = getLeftChild(index);
+
+            if(right < heap.size() && heap.get(index) < heap.get(right)){
+                swap(index, right);
+                index = right;
+            }else if(left < heap.size() && heap.get(index) < heap.get(left)){
+                swap(index, left);
+                index = left;
+            }else{
+                break;
+            }
+        }
+        return true;
+
+    }
+
     public int getParent(int index){
         return (index - 1)/2;
     }
