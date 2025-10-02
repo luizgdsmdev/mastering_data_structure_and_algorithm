@@ -106,6 +106,16 @@ public class Heap {
         return new ArrayList<>(this.heap);
     }
 
+    public Integer getNodeValue(int index){
+        if(heap.isEmpty() || index < 0 || index > heap.size() - 1) return null;
+
+        return heap.get(index);
+    }
+
+    public int getSize(){
+        return heap.size();
+    }
+
     //--------------------------------------------
     //Version or min-values
 
