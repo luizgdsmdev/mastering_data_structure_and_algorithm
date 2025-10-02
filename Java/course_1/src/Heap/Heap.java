@@ -144,18 +144,20 @@ public class Heap {
 
     //Re-ordering the elements after removal on removeMin() method
     public void SinkMin(int index){
-
         int max = index;
         while(true){
             Integer right = getRightChild(index);
             Integer left = getLeftChild(index);
 
-            if(right != null && heap.get(index) > heap.get(right)){
-                swap(index, right);
-                index = right;
-            }else if(left != null && heap.get(index) > heap.get(left)){
-                swap(index, left);
-                index = left;
+            if(left != null && heap.get(index) > heap.get(left)){
+                max = left;
+            }else if(right != null && heap.get(index) > heap.get(right)){
+                max = right;
+            }
+
+            if(max != index){
+                swap(max, index);
+                index = max;
             }else{
                 break;
             }

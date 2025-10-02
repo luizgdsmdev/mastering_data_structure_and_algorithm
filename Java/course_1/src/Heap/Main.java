@@ -9,6 +9,8 @@ public class Main {
         myHeap.insertMin(5);
         myHeap.insertMin(3);
         myHeap.insertMin(4);
+        myHeap.insertMin(0);
+        myHeap.insertMin(1);
 
         myHeap.removeMin();
 
