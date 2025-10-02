@@ -47,20 +47,23 @@ public class Heap {
     }
 
     public void Sink(int index){
-        if(index < 0 || index > heap.size() - 1) return;
+        int max = index;
 
         while(true){
             Integer right = getRightChild(index);
             Integer left = getLeftChild(index);
 
-            if(right != null && heap.get(index) < heap.get(right)){
-                swap(index, right);
-                index = right;
-            }else if(left != null && heap.get(index) < heap.get(left)){
-                swap(index, left);
-                index = left;
+            if(right != null && right < heap.size() && heap.get(index) < heap.get(right)){
+                max = right;
+            }if(left != null && left < heap.size() && heap.get(index) < heap.get(left)){
+                max = left;
+            }
+
+            if(max != index){
+                swap(max, index);
+                index = max;
             }else{
-                break;
+                return;
             }
         }
     }
@@ -80,7 +83,7 @@ public class Heap {
     public Integer getRightChild(int index){
         if(index < 0 || index > heap.size() - 1) return null;
         int childIndex = (index * 2) + 2;
-        if(childIndex >= 0 && childIndex < heap.size() - 1) return childIndex;
+        if(childIndex >= 0 && childIndex < heap.size()) return childIndex;
         else return null;
     }
 
@@ -88,7 +91,7 @@ public class Heap {
     public Integer getLeftChild(int index) {
         if (index < 0 || index > heap.size() - 1) return null;
         int childIndex = (index * 2) + 1;
-        if (childIndex >= 0 && childIndex < heap.size() - 1) return childIndex;
+        if (childIndex >= 0 && childIndex < heap.size()) return childIndex;
         else return null;
     }
 
@@ -103,4 +106,61 @@ public class Heap {
         return new ArrayList<>(this.heap);
     }
 
+    //--------------------------------------------
+    //Version or min-values
+
+    //Favor small values for the top of the heap
+    public boolean insertMin(int value){
+        if(heap.isEmpty()){
+            heap.add(value);
+            return true;
+        }
+
+        heap.add(value);
+        int valueIndex = heap.size() - 1;
+
+        while(true){
+            Integer parent = getParent(valueIndex);
+
+            if(parent != null && heap.get(valueIndex) < heap.get(parent)){
+                swap(valueIndex, parent);
+                valueIndex = parent;
+            }else{
+                break;
+            }
+        }
+        return true;
+    }
+
+    //Remove the lower element and re-order the structure
+    public Integer removeMin(){
+        if(heap.isEmpty()) return null;
+        Integer output = heap.getFirst();
+        heap.set(0, heap.removeLast());
+        SinkMin(0);
+
+        return output;
+    }
+
+    //Re-ordering the elements after removal on removeMin() method
+    public void SinkMin(int index){
+
+        int max = index;
+        while(true){
+            Integer right = getRightChild(index);
+            Integer left = getLeftChild(index);
+
+            if(right != null && heap.get(index) > heap.get(right)){
+                swap(index, right);
+                index = right;
+            }else if(left != null && heap.get(index) > heap.get(left)){
+                swap(index, left);
+                index = left;
+            }else{
+                break;
+            }
+
+
+        }
+    }
 }
