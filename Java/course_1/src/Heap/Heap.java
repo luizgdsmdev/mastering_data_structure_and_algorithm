@@ -7,84 +7,100 @@ public class Heap {
     private List<Integer> heap;
 
     Heap(){
-        this.heap = new ArrayList<>();
+        this.heap = new ArrayList<Integer>();
     }
 
+    //Insert a new node reordering the sequence to the highest value always on top
     public boolean insert(int value){
+        if(heap.isEmpty()){//skip non-necessary loop for the first node
+            heap.add(value);
+            return true;
+        }
+
         heap.add(value);
-        int crrIndex = heap.size() - 1;
+        int valueIndex = heap.size() - 1;
 
-        while(heap.get(crrIndex) > heap.get(getParent(crrIndex))){
-            swap(crrIndex, getParent(crrIndex));
-            crrIndex = getParent(crrIndex);
-        }
-
-        return true;
-    }
-
-    public boolean swap(int first, int last){
-        if(first < 0 || first > heap.size() || last < 0 || last > heap.size()) return false;
-
-        int temp = heap.get(last);
-        heap.set(last, heap.get(first));
-        heap.set(first, temp);
-
-        return true;
-    }
-
-    public boolean remove(){
-        int first = heap.getFirst();
-        int last = heap.getLast();
-        heap.set(0, last);
-        heap.removeFirst();
-        boolean SinkResponse = Sink(0);
-
-        //BackUp in case Sink returns false
-        if(SinkResponse) return true;
-        else{
-            heap.set(0, first);
-            heap.add(last);
-            return false;
+        //Bubble-up loop to keep higher numbers at top
+        while(true){
+            Integer parent = getParent(valueIndex);
+            if(parent != null && value > heap.get(parent) && valueIndex > 0){
+                swap(valueIndex, parent);
+                valueIndex = parent;
+            }else{
+                return true;
+            }
         }
     }
 
-    public boolean Sink(int index){
+    //Remove a node and re-order the sequences below
+    //Act by removing the root, switching it for the last node and then bubble-down the new root
+    //until find final position (keeping it always complete for a Heap structure)
+    public Integer remove(){
+        if(heap.isEmpty()) return null;
+        if(heap.size() == 1) return heap.removeFirst();
+
+        int output = heap.getFirst();
+        heap.set(0, heap.removeLast());
+        Sink(0);
+
+        return output;
+    }
+
+    public void Sink(int index){
+        if(index < 0 || index > heap.size() - 1) return;
+
         while(true){
             Integer right = getRightChild(index);
             Integer left = getLeftChild(index);
 
-            if(right < heap.size() && heap.get(index) < heap.get(right)){
+            if(right != null && heap.get(index) < heap.get(right)){
                 swap(index, right);
                 index = right;
-            }else if(left < heap.size() && heap.get(index) < heap.get(left)){
+            }else if(left != null && heap.get(index) < heap.get(left)){
                 swap(index, left);
                 index = left;
             }else{
                 break;
             }
         }
-        return true;
-
     }
 
-    public int getParent(int index){
+    //Swap positions between two nodes
+    //Private for secure the structure from outside access changes
+    private boolean swap(int node, int node2){
+        if(node < 0 || node > heap.size() - 1 || node2 < 0 || node2 > heap.size() - 1) return false;
+        int temp = heap.get(node);
+        heap.set(node, heap.get(node2));
+        heap.set(node2, temp);
+
+        return true;
+    }
+
+    //Return the index of the child, or null if it's invalid
+    public Integer getRightChild(int index){
+        if(index < 0 || index > heap.size() - 1) return null;
+        int childIndex = (index * 2) + 2;
+        if(childIndex >= 0 && childIndex < heap.size() - 1) return childIndex;
+        else return null;
+    }
+
+    //Return the index of the child, or null if it's invalid
+    public Integer getLeftChild(int index) {
+        if (index < 0 || index > heap.size() - 1) return null;
+        int childIndex = (index * 2) + 1;
+        if (childIndex >= 0 && childIndex < heap.size() - 1) return childIndex;
+        else return null;
+    }
+
+    //Return the index of the parent node
+    public Integer getParent(int index){
+        if(index < 0 || index > heap.size() - 1) return null;
         return (index - 1)/2;
     }
 
-    //Return index
-    public Integer getLeftChild(int index){
-        if(index > heap.size() || index < 0) return null;
-        return (index * 2) + 1;
-    }
-
-    //Return index
-    public Integer getRightChild(int index){
-        if(index > heap.size() || index < 0) return null;
-        return (index * 2) + 2;
-    }
-
+    //Return a copy of the heap
     public List<Integer> getHeap(){
-        return new ArrayList<>(heap);
+        return new ArrayList<>(this.heap);
     }
 
 }

@@ -9,6 +9,7 @@ public class Main {
         myHeap.insert(2);
         myHeap.insert(3);
         myHeap.insert(4);
+        myHeap.insert(5);
 
         myHeap.remove();
 
