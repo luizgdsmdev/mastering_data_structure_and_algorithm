@@ -1,4 +1,6 @@
-public class Remove_Duplicates_from_Sorted_Array {
+package _26_Remove_Duplicates_from_Sorted_Array;
+
+public class _26_Remove_Duplicates_from_Sorted_Array {
 
 // 26. Remove Duplicates from Sorted Array
 // Solved
@@ -28,7 +30,7 @@ public class Remove_Duplicates_from_Sorted_Array {
 // }
 // If all assertions pass, then your solution will be accepted.
 
- 
+
 
 // Example 1:
 
@@ -42,7 +44,7 @@ public class Remove_Duplicates_from_Sorted_Array {
 // Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
 // Explanation: Your function should return k = 5, with the first five elements of nums being 0, 1, 2, 3, and 4 respectively.
 // It does not matter what you leave beyond the returned k (hence they are underscores).
- 
+
 
 // Constraints:
 
@@ -67,6 +69,4 @@ public class Remove_Duplicates_from_Sorted_Array {
         return k;
 
     }
-
-    
 }

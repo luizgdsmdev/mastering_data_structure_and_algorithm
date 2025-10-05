@@ -1,7 +1,6 @@
 import java.util.Arrays;
-import java.util.PriorityQueue;
 
-public class Merge_Sorted_Array {
+public class Merge_Sorted_Array{
 //    88. Merge Sorted Array
 //    Easy
 //    You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
@@ -41,12 +40,26 @@ public class Merge_Sorted_Array {
 //
 //    Follow up: Can you come up with an algorithm that runs in O(m + n) time?
 
-
+// Runtime: 0ms - Beats: 100%
+//Memory: 42.21MB - Beats: 62.12%
 
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        int p1 = m - 1;
+        int p2 = n - 1;
+        int crr = m + n - 1;
 
+        while(crr >= 0){
+            if(p1 >= 0 && p2 >= 0 && nums1[p1] > nums2[p2]){
+                nums1[crr] = nums1[p1];
+                p1--;
+            }else if(p2 >= 0){
+                nums1[crr] = nums2[p2];
+                p2--;
+            }
+            crr--;
+        }
 
-
+        System.out.println(Arrays.toString(nums1));
 
     }
 

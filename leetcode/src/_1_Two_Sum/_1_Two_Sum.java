@@ -1,3 +1,9 @@
+package _1_Two_Sum;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class _1_Two_Sum {
 //1. Two Sum
 //Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 //You may assume that each input would have exactly one solution, and you may not use the same element twice.
@@ -22,18 +28,29 @@
 //-109 <= target <= 109
 //Only one valid answer exists.
 
+
 //Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
 
-//Runtime: 0ms - Beats: 100.00%
-//Memory: 57.43MB - Beats: 12.49%
+//Runtime: 2ms - Beats: 98.90%
+//Memory: 45.08MB - Beats: 47.80%
 
-var twoSum = function (nums, target) {
-  const dict = { [nums[0]]: 0 };
 
-  for (let i = 1; i < nums.length; i++) {
-    if (dict[target - nums[i]] != undefined) return [dict[target - nums[i]], i];
-    dict[nums[i]] = i;
-  }
-};
+    public static int[] twoSumFunction(int[] nums, int target) {
+        Map<Integer, Integer> dict = new HashMap<>();
+        dict.put(nums[0], 0);
 
-console.log(twoSum([2, 7, 11, 15], 9));
+        for(int i = 1; i < nums.length; i++){
+            if(dict.get(target - nums[i]) != null){
+                return new int[]{dict.get(target - nums[i]), (int)i};
+            }
+            dict.put(nums[i], (int)i);
+        }
+        return new int[1];
+    }
+
+
+    public static void main(String[] args){
+        int[] case1 = {2, 7, 11, 15};
+        System.out.println(Arrays.toString(twoSumFunction(case1, 26)));;
+    }
+}
