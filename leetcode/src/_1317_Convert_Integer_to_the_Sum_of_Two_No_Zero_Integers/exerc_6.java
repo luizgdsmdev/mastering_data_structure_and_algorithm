@@ -1,4 +1,4 @@
-package mastering_data_structure_and_algorithm.leetcode;
+package _1317_Convert_Integer_to_the_Sum_of_Two_No_Zero_Integers;
 
 import java.util.Arrays;
 // No-Zero integer is a positive integer that does not contain any 0 in its decimal representation.

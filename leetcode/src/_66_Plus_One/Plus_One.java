@@ -1,3 +1,5 @@
+package _66_Plus_One;
+
 import java.util.Arrays;
 
 public class Plus_One{

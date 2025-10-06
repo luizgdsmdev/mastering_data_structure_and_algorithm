@@ -1,3 +1,5 @@
+package _27_Remove_Element;
+
 public class Remove_Element {
 
 // 27. Remove Element
