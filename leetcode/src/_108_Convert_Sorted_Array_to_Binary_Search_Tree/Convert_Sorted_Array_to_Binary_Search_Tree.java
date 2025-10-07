@@ -23,7 +23,6 @@ package _108_Convert_Sorted_Array_to_Binary_Search_Tree;
 import java.util.ArrayList;
 import java.util.List;
 
-
 // -> Runtime: 0ms, beats 100.00% of submissions.
 // -> Memory Usage: 43.20MB, beats 58.34% of submissions.
 public class Convert_Sorted_Array_to_Binary_Search_Tree {
