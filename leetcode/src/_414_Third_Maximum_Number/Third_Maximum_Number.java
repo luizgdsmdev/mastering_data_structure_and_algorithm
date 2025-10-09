@@ -35,9 +35,10 @@ package _414_Third_Maximum_Number;
 //
 //Follow up: Can you find an O(n) solution?
 
+// -> Runtime: 0ms, beats 8.44% of submissions.
+// -> Memory Usage: 44.33MB, beats 32.65% of submissions.
+
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeSet;
 
 public class Third_Maximum_Number {
