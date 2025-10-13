@@ -26,7 +26,10 @@ package _594_Longest_Harmonious_Subsequence;
 //1 <= nums.length <= 2 * 104
 //-109 <= nums[i] <= 109
 
-import java.util.Arrays;
+// -> Runtime: 22ms, beats 12.37% of submissions.
+// -> Memory Usage: 45.78MB, beats 46.39% of submissions.
+
+
 import java.util.HashMap;
 import java.util.Map;
 
