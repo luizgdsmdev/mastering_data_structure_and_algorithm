@@ -21,7 +21,7 @@ package _643_Maximum_Average_Subarray_I;
 //-104 <= nums[i] <= 104
 
 // -> Runtime: 2ms, beats 99.91% of submissions.
-// -> Memory Usage: 56.15MB, beats 78.81% of submissions.
+// -> Memory Usage: 55.15MB, beats 99.75% of submissions.
 
 public class Maximum_Average_Subarray_I {
     public static double findMaxAverage(int[] nums, int k) {
@@ -36,7 +36,7 @@ public class Maximum_Average_Subarray_I {
         for (int i = 0; i < k; i++) sum += nums[i];
         int maxSum = sum;
 
-        for (int i = k; i < nums.length; i++) {
+        for (int i = k; i < nums.length; i++){
             sum = sum - nums[i - k] + nums[i];
             maxSum = Math.max(maxSum, sum);
         }
