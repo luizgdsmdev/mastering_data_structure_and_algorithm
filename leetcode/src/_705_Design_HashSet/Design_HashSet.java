@@ -41,7 +41,7 @@ public class Design_HashSet {
     private final int SIZE = 7;
     private final int INITIAL_BUCKET_SIZE = 2;
 
-    public MyHashSet(){
+    public void MyHashSet(){
         bucket = new Integer[SIZE][];
         for(int i = 0; i < SIZE; i++){
             bucket[i] = null;
@@ -170,6 +170,5 @@ public class Design_HashSet {
 //    }
 
     public static void main(String[] args){
-        MyHashSet obj = new MyHashSet();
     }
 }
