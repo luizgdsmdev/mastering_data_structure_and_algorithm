@@ -52,10 +52,10 @@ public class Design_HashMap {
             this.value = value;
         }
     }
-    public MyHashMap() {
-        bucket = new ArrayList<>(SIZE);
-        for(int i = 0; i < SIZE; i++) bucket.add(i, null);
-    }
+//    public MyHashMap() {
+//        bucket = new ArrayList<>(SIZE);
+//        for(int i = 0; i < SIZE; i++) bucket.add(i, null);
+//    }
 
     public int hash(int key){ return (key * 23) % SIZE; }
 
@@ -108,6 +108,6 @@ public class Design_HashMap {
     }
 
     public static void main(String[] args){
-        MyHashMap myHashMap = new MyHashMap();
+        //MyHashMap myHashMap = new MyHashMap();
     }
 }
