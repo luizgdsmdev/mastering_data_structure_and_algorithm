@@ -38,28 +38,19 @@ public class Projection_Area_of_3D_Shapes {
         int[] maxRow = new int[n];
         int[] maxCol = new int[n];
 
-        int row = 0;
-        int col = 0;
-
         for (int i = 0; i < n; i++) {
-            int rowTemp = 0;
-            int colTemp = 0;
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] > 0) up++;
                 maxRow[i] = Math.max(maxRow[i], grid[i][j]);
                 maxCol[j] = Math.max(maxCol[j], grid[i][j]);
-                rowTemp += Math.max(rowTemp, grid[i][j]);
-                colTemp += Math.max(colTemp, grid[i][j]);
             }
 
-            row += rowTemp;
-            col += colTemp;
         }
 
         for (int m : maxRow) side += m;
         for (int m : maxCol) back += m;
 
-        return up + row + col;
+        return up + side + back;
     }
 
     public static void main(String[] args){
