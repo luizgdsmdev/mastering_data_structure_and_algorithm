@@ -28,6 +28,9 @@ package _908_Smallest_Range_I;
 //0 <= nums[i] <= 104
 //0 <= k <= 104
 
+// -> Runtime: 3ms, beats 70.66% of submissions.
+// -> Memory Usage: 45.35MB, beats 81.39% of submissions.
+
 import java.util.HashSet;
 
 public class Smallest_Range_I {
@@ -47,8 +50,6 @@ public class Smallest_Range_I {
         }
 
         return output;
-
-
 
     }
 
